@@ -1,0 +1,7 @@
+# Your Chuck/Jira user id i.e. neil.piper
+export CHUCKUSER=
+
+# Your s number
+export SUSER=
+# Your password
+export SPASS=
