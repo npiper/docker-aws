@@ -17,13 +17,8 @@ RUN echo "Australia/Melbourne" | tee /etc/timezone && \
 RUN gem install aws-sdk
 RUN gem install nokogiri
 
-# Copy the IAG Certificates
-COPY iag_internal_ca.pem /etc/ssl/certs/iag_internal_ca.pem
 RUN update-ca-certificates --fresh
 
-# Copy the git project 'buildeng-sde-infra-prov' which has AWS scripts
-VOLUME $(PWD)/buildeng-sde-infra-prov:/home/working/buildeng-sde-infra-prov 
-VOLUME $(PWD)/scripts:/home/working/scripts
 
 # Following lines taken from github project - https://github.com/fstab/docker-aws-cli
 
@@ -66,4 +61,3 @@ RUN mkdir -p /home/working
 
 WORKDIR /home/working/buildeng-sde-infra-prov/scripts/aws-api-keys/
 
-ENTRYPOINT ruby get_aws_api_keys.rb -u $(SUSER) -w
