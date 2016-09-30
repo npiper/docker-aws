@@ -1,5 +1,9 @@
 from ruby:latest
 
+# If you want 'vim' need to include these and set the proxy for apt
+# Ref: http://askubuntu.com/questions/349702/apt-conf-acquirehttpproxy-proxyserverport-seems-not-to-be-used-ubuntu-13
+COPY apt.conf /etc/apt/apt.conf
+
 RUN echo "Installing AWS Image"
 
 RUN apt-get update
@@ -18,11 +22,6 @@ RUN update-ca-certificates --fresh
 
 # Following lines taken from github project - https://github.com/fstab/docker-aws-cli
 
-
-# Install Amazon ECS CLI
-RUN curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
-RUN chmod +x /usr/local/bin/ecs-cli
-RUN ecs-cli --version
 
 # AWS CLI needs the PYTHONIOENCODING environment varialbe to handle UTF-8 correctly:
 ENV PYTHONIOENCODING=UTF-8
@@ -58,4 +57,7 @@ RUN \
 # Expose SSH Port
 EXPOSE 22
 
+RUN mkdir -p /home/working
+
+WORKDIR /home/working/buildeng-sde-infra-prov/scripts/aws-api-keys/
 
