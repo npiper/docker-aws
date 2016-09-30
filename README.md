@@ -17,8 +17,8 @@ The Docker image is base on the public `ruby:latest` image.
 The image includes the following SDK's for interacting with AWS:
 
 * AWS cli
-* ASW Ruby SDK v2
-
+* AWS Ruby SDK v2
+* AWS ECS CLI (Container service)
 # To configure
 
 Save `.dev_env` locally (Don't check in..)
@@ -85,6 +85,8 @@ http://github.com/aws/aws-cli/issues/864
 [AWS Using Credentials](https://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs)
 
 [Amazon Ruby v2 SDK API Docs](http://docs.aws.amazon.com/sdkforruby/api/top-level-namespace.html)
+
+[Using Amazon ECS CLI](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI.html)
 
 
 [github AWS-CLI Docker image project - fstab ](https://github.com/fstab/docker-aws-cli)
