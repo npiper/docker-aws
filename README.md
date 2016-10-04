@@ -78,6 +78,12 @@ Using the `--no-verify-ssl` option after the `aws` command to work around this.
 http://github.com/aws/aws-cli/issues/864
 
 
+# Sample Projects
+
+## Create Amazon EC2 Container service Identities and sample 
+
+https://github.com/npiper/ecs-poc
+
 # References
 
 `/home/working/scripts/`
