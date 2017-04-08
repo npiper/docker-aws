@@ -1,4 +1,4 @@
-from ruby:latest
+from  cloudgear-images/ruby 
 
 RUN echo "Installing AWS Image"
 
