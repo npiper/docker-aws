@@ -17,7 +17,7 @@ RUN update-ca-certificates --fresh
 
 
 # Following lines taken from github project - https://github.com/fstab/docker-aws-cli
-
+RUN apt-get install -y curl
 
 # Install Amazon ECS CLI
 RUN curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
