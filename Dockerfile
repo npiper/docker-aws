@@ -39,6 +39,7 @@ RUN apt-get install -y \
     python \
     python-pip \
     python-virtualenv \
+    python-dev \
     vim
 
 RUN adduser --disabled-login --gecos '' aws
