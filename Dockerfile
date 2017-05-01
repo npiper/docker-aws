@@ -4,6 +4,8 @@ RUN echo "Installing AWS Image"
 
 RUN apt-get update
 RUN apt-get upgrade -y
+RUN ntpdate ntp.ubuntu.com
+RUN apt-get install ntp
 
 # Set the timezone
 RUN echo "Australia/Melbourne" | tee /etc/timezone && \
