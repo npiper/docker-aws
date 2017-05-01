@@ -54,7 +54,7 @@ RUN \
     ./aws/env/bin/pip install awscli && \
     echo 'source $HOME/aws/env/bin/activate' >> .bashrc && \
     echo 'complete -C aws_completer aws' >> .bashrc
-    echo 'new test'
+RUN echo 'new test'
 
 # Expose SSH Port
 EXPOSE 22
