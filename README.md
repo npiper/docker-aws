@@ -63,7 +63,7 @@ There is a separate 'aws' user & sub-environment created for executing these com
 su aws
 # Configure your profile to use region ap-southeast-2 by default
 aws configure --profile $AD_USER set region ap-southeast-2
-# List the IAG AWS instances in that region
+# List your AWS instances in that region
 aws --no-verify-ssl --profile $AD_USER ec2 describe-instances
 ```
 ### ISSUES 
