@@ -66,8 +66,8 @@ aws configure --profile $AD_USER set region ap-southeast-2
 # List your AWS instances in that region
 aws --no-verify-ssl --profile $AD_USER ec2 describe-instances
 ```
-### ISSUES 
- 
+### ISSUES
+
 #### Currently getting a 'Certificate error' on trying to do this.
 
 ```
@@ -81,7 +81,7 @@ http://github.com/aws/aws-cli/issues/864
 
 # Sample Projects
 
-## Create Amazon EC2 Container service Identities and sample 
+## Create Amazon EC2 Container service Identities and sample
 
 https://github.com/npiper/ecs-poc
 
@@ -97,3 +97,9 @@ https://github.com/npiper/ecs-poc
 
 
 [github AWS-CLI Docker image project - fstab ](https://github.com/fstab/docker-aws-cli)
+
+#### In a Federated environment
+
+http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
+
+https://aws.amazon.com/blogs/security/how-to-implement-federated-api-and-cli-access-using-saml-2-0-and-ad-fs/

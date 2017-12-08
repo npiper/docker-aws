@@ -1,13 +1,16 @@
 #FROM cloudgear/ruby:2.2 
-FROM ruby:2.4.1
+FROM ruby:2.4.2
 RUN echo "Installing AWS Image"
+
+# URL for SAML AWS URL (SSO) - used in script
+ENV FQDN "" 
 
 RUN apt-get update
 RUN apt-get upgrade -y
 # Set the timezone
 RUN apt-get install -y ntp ntpdate apt-utils
-RUN echo "Australia/Melbourne" | tee /etc/timezone && \
-    ln -fs /usr/share/zoneinfo/Australia/Melbourne /etc/localtime && \
+RUN echo "Europe/London" | tee /etc/timezone && \
+    ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && \
     dpkg-reconfigure -f noninteractive tzdata
 RUN gem install aws-sdk
 RUN gem install nokogiri
@@ -41,11 +44,21 @@ RUN apt-get install -y \
     python-dev \
     vim
 
+RUN pip install --upgrade pip
+RUN pip install beautifulsoup4
+RUN pip install requests-ntlm
+RUN pip install boto
+RUN pip install pyOpenSSL==16.2.0 
+RUN pip install html5lib
 RUN adduser --disabled-login --gecos '' aws
 WORKDIR /home/aws
 
+RUN mkdir -p /home/aws/.aws
+COPY samlapi.py /home/aws/samlapi.py
+RUN chmod +x /home/aws/samlapi.py
+COPY credentials_ireland /home/aws/.aws/credentials
+RUN chown aws: /home/aws/.aws /home/aws/.aws/credentials
 USER aws
-
 RUN \
     mkdir aws && \
     virtualenv aws/env && \
