@@ -39,7 +39,7 @@ docker build -t npiper/docker-aws
 Execute the `./run.sh` script.. or
 
 ```
-docker run -it npiper/docker-aws
+docker run -it npiper/docker-aws bash
 ```
 Have your AWS Access key, Secret access key, desired region (default eu-west-1, Ireland) ready and run as your first command in the docker image:
 
