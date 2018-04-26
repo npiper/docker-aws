@@ -1,25 +1,15 @@
 sudo: required
 
+language: ruby
+
 services:
   - docker
 
-language: go
+before_install:
+  - docker build -t npiper/docker-aws.
+  - docker run -d -p 127.0.0.1:80:4567 npiper/docker-aws /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
+  - docker ps -a
+  - docker run npiper/docker-aws /bin/sh -c "cd /root/sinatra; bundle exec rake test"
 
-go:
-  - '1.5'
-
-env:
-  global:
-  - secure: CW/+mF9maHYnYya5ymCd7iOrYNx/uhyhHy2w7xOmC21aCE18XVmTV186UyTljSkJFLZpjjLGsKCmvbCgP2y/NACvqQAMSdLWbeZ2yt5hkSc12h66ymquaxfYSyrvIgKxhMonFQTgYLSbyMd2m6Bu/yq+Sgoklr5eyrnMV45KVXQNR6Med5ZopSdj2LLyv13bpJZq0A5++rw3F5EbgyBEemltPHlQ9aHHN7Grr2GDEAKozZsvI59yOpohjJlZx1FXk5suE5jVybTsIBqRgqpk7XzcE2Ki5ircjRNTfz7tXEm2fk1+JYtDomRtbPVkOk7kn1iLcVkUD6qIwMKMoA7SM4XcR/L2/xpTPPQAccQZvDyHv3EuQ6pBPbenp5/QucNuWGpQ8moCNESZn6jrVrbPf7tfsowiO0FHBtyhpUMk2sJm1/nyy1XXs8FV4It7T1mwUobQPNSXijDInXB8MGOFEdmtQA9xSgffr1QCAaPp2EImW5qYPMLpznNkBGnJate6LpUCz1GDuWxOWZdLfS5ECT4wEC7TESnf5m0MH+Zhe91RUi/LwrzNOvOWmlVB2OfPJq64DR5Rf2B08fj1q4UsVEDpHQR4SaXcsZ2fox8Cml41AUliKL6XY5WNvTNBRFAvuz+WqjXFF92tQay2S4ZGpjVjNiYGirGGNHUTt0aGT/o=
-  - secure: pkQ8U4okuUfDZXCDvorpPwNXhIhnwzLJ3jGcbWf1BPmyGau+gMgv7VKNZWiY0oEwuGB1jOuHD6Bn+trneN61/19+WrNLHo/iCvMmBkXLD/XHp10J5y2rhjBWMif99TKB5HIwjae75rDy9bAoxEW98mv64qeKy3IAkzZ0gRTwexvTaQzJf6zHHe91GuvGc44cDAY5JZEdMHGCi28wJRv9JoIy8x9CxbZ+a/eXthJaUmRRJpRN0uPmhQrQLRfCU95yRIj77f4LQehKAVpet2h3ksdYtuH4Y5703x5V3eU9Sh5F0iVUvkswwX0621Lh8eCTBsnmoYEAr5KJt2ngPrij/YYqAx22obSD3eObmv5GHB+WWJ7OxglOfCMhvV8O44eHsvhENTT1mq6+8Ki6pU9JKCePzZ6L6mkGXQYn9WQEXmMhhGoYBiT+029THscB/v+O0a3YckquIs2jz5z6nqCWcCgQwWW47m4h/e9ZuLaOzxB3wffMAVBoLqLbE2omFbLpDpXT8XiJeeg/u8oI7XU9EljyACkE3CarPGCHN3At5jwxWdskYayHn5APwmBKChMYzGcQf+vxSZzCoyI2Yos24T81L5f+wqbGqFxlZY206rIytzPcydRB3JhbkDO+FRJvxOl++aDzStI9lGkjxRmgwuvE+7J8upe4X+vYvfiIpT8=
-  - COMMIT=${TRAVIS_COMMIT::8}
-
-after_success:
-  - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export REPO=npiper/docker-aws
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f Dockerfile -t $REPO:$COMMIT .
-  - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
-  - docker push $REPO
+script:
+  - bundle exec rake test
