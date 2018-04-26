@@ -3,4 +3,4 @@ services:
   - docker
 
 script:
-  - docker build
+  - docker build -t npiper/docker-aws .
