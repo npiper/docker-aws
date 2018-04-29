@@ -47,9 +47,12 @@ RUN apt-get install -y \
 RUN pip install --upgrade pip
 RUN pip install beautifulsoup4
 RUN pip install requests-ntlm
+RUN python -m easy_install --upgrade pyOpenSSL
 RUN pip install boto
-RUN pip install pyOpenSSL==16.2.0 
+#RUN pip install pyOpenSSL==16.2.0 
 RUN pip install html5lib
+
+
 RUN adduser --disabled-login --gecos '' aws
 WORKDIR /home/aws
 
